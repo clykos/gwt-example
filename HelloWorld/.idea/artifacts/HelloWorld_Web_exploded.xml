@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="HelloWorld:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/HelloWorld_war_exploded</output-path>
+  <artifact type="exploded-war" name="HelloWorld:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/HelloWorld_Web_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="HelloWorld/web/Web" />
       <element id="directory" name="WEB-INF">
@@ -8,6 +8,9 @@
           <element id="module-output" name="HelloWorld" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="AppEngine API" />
+          <element id="library" level="project" name="AppEngine ORM" />
+          <element id="library" level="project" name="gwt-user" />
           <element id="file-copy" path="$USER_HOME$/.IntelliJIdea13/config/gwt-2.6.1/gwt-servlet.jar" />
         </element>
       </element>

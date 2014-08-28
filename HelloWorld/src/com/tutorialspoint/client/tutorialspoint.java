@@ -1,28 +1,64 @@
 package com.tutorialspoint.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DecoratorPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class tutorialspoint implements EntryPoint {
     public void onModuleLoad() {
-        //create textboxes
-        TextBox textBox1 = new TextBox();
-        TextBox textBox2 = new TextBox();
+      /*create UI */
+        final TextBox txtName = new TextBox();
+        txtName.setWidth("200");
+        txtName.addKeyUpHandler(new KeyUpHandler() {
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                if(event.getNativeKeyCode() == KeyCodes.KEY_ENTER){
+                    Window.alert(getGreeting(txtName.getValue()));
+                }
+            }
+        });
+        Label lblName = new Label("Enter your name: ");
 
-        //add text to text box
-        textBox2.setText("Hello World!");
+        Button buttonMessage = new Button("Click Me!");
 
-        //set textbox as readonly
-        textBox2.setReadOnly(true);
+        buttonMessage.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                Window.alert(getGreeting(txtName.getValue()));
+            }});
 
-        // Add text boxes to the root panel.
-        VerticalPanel panel = new VerticalPanel();
-        panel.setSpacing(10);
-        panel.add(textBox1);
-        panel.add(textBox2);
+        HorizontalPanel hPanel = new HorizontalPanel();
+        hPanel.add(lblName);
+        hPanel.add(txtName);
+        hPanel.setCellWidth(lblName, "130");
 
+        VerticalPanel vPanel = new VerticalPanel();
+        vPanel.setSpacing(10);
+        vPanel.add(hPanel);
+        vPanel.add(buttonMessage);
+        vPanel.setCellHorizontalAlignment(buttonMessage,
+                HasHorizontalAlignment.ALIGN_RIGHT);
+
+        DecoratorPanel panel = new DecoratorPanel();
+        panel.add(vPanel);
+
+        // Add widgets to the root panel.
         RootPanel.get("gwtContainer").add(panel);
+    }
+
+    public String getGreeting(String name){
+        return "Hello "+name+"!";
     }
 }
